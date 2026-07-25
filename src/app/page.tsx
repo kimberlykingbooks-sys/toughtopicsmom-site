@@ -31,6 +31,7 @@ export default function HomePage() {
           </h2>
           <VideoPlayer
             src="/videos/i-said-no-trailer.mp4"
+            poster="/videos/i-said-no-trailer-poster.jpg"
             className="mt-8"
           />
         </Reveal>
