@@ -1,3 +1,4 @@
+import Image from "next/image";
 import ChecklistCard from "@/components/ChecklistCard";
 import LogoStrip from "@/components/LogoStrip";
 import { sitePressMentions } from "@/lib/press";
@@ -26,10 +27,14 @@ export default function AboutPage() {
     <div>
       <section className="bg-gradient-to-b from-brand-light/40 to-white px-4 py-16 text-center sm:px-6">
         <Reveal>
-          {/* TODO: replace with Kimberly's professional headshot */}
-          <div className="mx-auto flex h-40 w-40 items-center justify-center rounded-full bg-brand-light/60 text-sm text-brand-dark shadow-md">
-            Headshot coming soon
-          </div>
+          <Image
+            src="/images/kimberly-headshot.png"
+            alt="Kimberly King"
+            width={160}
+            height={160}
+            className="mx-auto h-40 w-40 rounded-full object-cover shadow-md"
+            priority
+          />
           <h1 className="mt-6 text-4xl font-bold text-brand-dark sm:text-5xl">
             Kimberly King
           </h1>
@@ -44,10 +49,13 @@ export default function AboutPage() {
 
       <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6">
         <Reveal className="flex flex-col items-center gap-8 sm:flex-row sm:items-start">
-          {/* TODO: bio-section photo from Kimberly */}
-          <div className="mx-auto flex h-56 w-44 shrink-0 items-center justify-center rounded-2xl bg-brand-light/40 text-sm text-brand-dark shadow-sm sm:mx-0">
-            Photo coming soon
-          </div>
+          <Image
+            src="/images/kimberly-headshot.png"
+            alt="Kimberly King"
+            width={176}
+            height={224}
+            className="mx-auto h-56 w-44 shrink-0 rounded-2xl object-cover shadow-sm sm:mx-0"
+          />
           <div className="space-y-4 text-gray-600">
             <p>
               Kimberly King, known as the Tough Topics Mom, is a leading
