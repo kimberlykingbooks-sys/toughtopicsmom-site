@@ -1,5 +1,6 @@
-import Link from "next/link";
 import { navLinks } from "@/lib/nav-links";
+import NavLink from "@/components/NavLink";
+import SocialLinks from "@/components/SocialLinks";
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -19,16 +20,18 @@ export default function Footer() {
           <ul className="flex flex-wrap justify-center gap-x-6 gap-y-2">
             {navLinks.map((link) => (
               <li key={link.href}>
-                <Link
-                  href={link.href}
+                <NavLink
+                  link={link}
                   className="text-sm font-medium text-white/90 transition-colors hover:text-white"
                 >
                   {link.label}
-                </Link>
+                </NavLink>
               </li>
             ))}
           </ul>
         </nav>
+
+        <SocialLinks className="mt-8" />
 
         <p className="mt-8 text-center text-xs text-white/75">
           &copy; {year} Tough Topics Mom. All rights reserved.

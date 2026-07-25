@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { navLinks } from "@/lib/nav-links";
+import NavLink from "@/components/NavLink";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -44,13 +45,13 @@ export default function Header() {
           <ul className="flex items-center gap-6">
             {navLinks.map((link) => (
               <li key={link.href}>
-                <Link
-                  href={link.href}
+                <NavLink
+                  link={link}
                   className="group relative text-sm font-medium text-gray-700 transition-colors hover:text-brand-dark"
                 >
                   {link.label}
                   <span className="absolute -bottom-1 left-0 h-0.5 w-full origin-left scale-x-0 bg-accent transition-transform duration-200 group-hover:scale-x-100" />
-                </Link>
+                </NavLink>
               </li>
             ))}
           </ul>
@@ -90,13 +91,13 @@ export default function Header() {
             <ul className="flex flex-col px-4 py-2 sm:px-6">
               {navLinks.map((link) => (
                 <li key={link.href}>
-                  <Link
-                    href={link.href}
+                  <NavLink
+                    link={link}
                     className="block py-2 text-sm font-medium text-gray-700 hover:text-brand-dark"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     {link.label}
-                  </Link>
+                  </NavLink>
                 </li>
               ))}
             </ul>
