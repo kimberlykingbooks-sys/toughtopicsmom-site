@@ -7,6 +7,9 @@ import { AnimatePresence, motion } from "framer-motion";
 import { navLinks } from "@/lib/nav-links";
 import NavLink from "@/components/NavLink";
 
+// TODO: point at our own booking flow once one exists on this site
+const DISCOVERY_CALL_URL = "https://www.toughtopicsmom.com/free-discovery-call";
+
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -41,21 +44,32 @@ export default function Header() {
           </span>
         </Link>
 
-        <nav className="hidden md:block">
-          <ul className="flex items-center gap-6">
-            {navLinks.map((link) => (
-              <li key={link.href}>
-                <NavLink
-                  link={link}
-                  className="group relative text-sm font-medium text-gray-700 transition-colors hover:text-brand-dark"
-                >
-                  {link.label}
-                  <span className="absolute -bottom-1 left-0 h-0.5 w-full origin-left scale-x-0 bg-accent transition-transform duration-200 group-hover:scale-x-100" />
-                </NavLink>
-              </li>
-            ))}
-          </ul>
-        </nav>
+        <div className="hidden items-center gap-6 md:flex">
+          <nav>
+            <ul className="flex items-center gap-6">
+              {navLinks.map((link) => (
+                <li key={link.href}>
+                  <NavLink
+                    link={link}
+                    className="group relative text-sm font-medium text-gray-700 transition-colors hover:text-brand-dark"
+                  >
+                    {link.label}
+                    <span className="absolute -bottom-1 left-0 h-0.5 w-full origin-left scale-x-0 bg-accent transition-transform duration-200 group-hover:scale-x-100" />
+                  </NavLink>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          <a
+            href={DISCOVERY_CALL_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-white transition-all duration-200 hover:scale-105 hover:bg-accent-dark hover:shadow-md"
+          >
+            Free Discovery Call
+          </a>
+        </div>
 
         <button
           type="button"
@@ -100,6 +114,17 @@ export default function Header() {
                   </NavLink>
                 </li>
               ))}
+              <li className="pt-2">
+                <a
+                  href={DISCOVERY_CALL_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-white"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Free Discovery Call
+                </a>
+              </li>
             </ul>
           </motion.nav>
         )}

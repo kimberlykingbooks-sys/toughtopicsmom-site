@@ -1,7 +1,7 @@
 import Image from "next/image";
 import ChecklistCard from "@/components/ChecklistCard";
 import LogoStrip from "@/components/LogoStrip";
-import { sitePressMentions } from "@/lib/press";
+import { featuredPress, sitePressMentions } from "@/lib/press";
 import TestimonialSection from "@/components/TestimonialSection";
 import CtaBand from "@/components/CtaBand";
 import Reveal from "@/components/Reveal";
@@ -92,6 +92,25 @@ export default function AboutPage() {
 
         <Reveal className="mt-16 border-t border-gray-200 pt-12">
           <LogoStrip heading="As Seen On" mentions={sitePressMentions} />
+        </Reveal>
+
+        <Reveal className="mt-8">
+          <a
+            href={featuredPress.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mx-auto flex max-w-xl flex-col items-center gap-1 rounded-2xl border border-gray-200 bg-white p-6 text-center shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-lg"
+          >
+            <span className="text-xs font-semibold uppercase tracking-wide text-accent">
+              Featured Interview — {featuredPress.publication}
+            </span>
+            <span className="font-semibold text-brand-dark">
+              {featuredPress.title}
+            </span>
+            <span className="text-sm text-gray-500 underline">
+              Watch the interview
+            </span>
+          </a>
         </Reveal>
 
         <Reveal className="mt-16">

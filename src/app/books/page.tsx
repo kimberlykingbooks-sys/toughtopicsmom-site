@@ -21,7 +21,7 @@ export default function BooksPage() {
       </Reveal>
 
       <Reveal className="mt-16">
-        <TestimonialSection />
+        <TestimonialSection limit={3} />
       </Reveal>
 
       <div className="mt-16 flex flex-col gap-8">

@@ -5,6 +5,19 @@ export type PressMention = {
   logoSrc?: string;
 };
 
+export type FeaturedPress = {
+  publication: string;
+  title: string;
+  url: string;
+};
+
+// Sourced from toughtopicsmom.com — WJLA is the ABC affiliate for Washington, DC.
+export const featuredPress: FeaturedPress = {
+  publication: "ABC7 / WJLA — The Mother Side",
+  title: "The Importance of Discussing Body Safety and Privacy with Children",
+  url: "https://wjla.com/features/the-mother-side/the-importance-of-discussing-body-safety-and-privacy-with-children",
+};
+
 export const sitePressMentions: PressMention[] = [
   { name: "Popsugar", logoSrc: "/logos/popsugar.png" },
   { name: "NBC", logoSrc: "/logos/nbc.svg" },
