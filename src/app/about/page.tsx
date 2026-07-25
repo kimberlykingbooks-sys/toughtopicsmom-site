@@ -1,5 +1,110 @@
-import PagePlaceholder from "@/components/PagePlaceholder";
+import ChecklistCard from "@/components/ChecklistCard";
+import LogoStrip from "@/components/LogoStrip";
+import { sitePressMentions } from "@/lib/press";
+import TestimonialSection from "@/components/TestimonialSection";
+import CtaBand from "@/components/CtaBand";
+import Reveal from "@/components/Reveal";
+
+const searchingFor = [
+  "A child sexual abuse prevention expert to guide your team",
+  "A powerful keynote speaker for your next conference",
+  "A certified body safety educator for children and parents",
+  "Signed copies or bulk orders of prevention books",
+  "Private consultations and staff trainings",
+];
+
+const kimberlyOffers = [
+  "Professional, trauma-informed support",
+  "Approachable guidance grounded in real experience",
+  "Evidence-based best practices",
+  "Customized training programs",
+  "Ongoing consultation and support",
+];
 
 export default function AboutPage() {
-  return <PagePlaceholder title="About" />;
+  return (
+    <div>
+      <section className="bg-gradient-to-b from-brand-light/40 to-white px-4 py-16 text-center sm:px-6">
+        <Reveal>
+          {/* TODO: replace with Kimberly's professional headshot */}
+          <div className="mx-auto flex h-40 w-40 items-center justify-center rounded-full bg-brand-light/60 text-sm text-brand-dark shadow-md">
+            Headshot coming soon
+          </div>
+          <h1 className="mt-6 text-4xl font-bold text-brand-dark sm:text-5xl">
+            Kimberly King
+          </h1>
+          <p className="mt-1 text-lg font-medium text-gray-600">
+            Tough Topics Mom
+          </p>
+          <p className="mt-4 text-lg italic text-brand-dark">
+            Empowered Adults. Protected Kids.
+          </p>
+        </Reveal>
+      </section>
+
+      <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6">
+        <Reveal className="flex flex-col items-center gap-8 sm:flex-row sm:items-start">
+          {/* TODO: bio-section photo from Kimberly */}
+          <div className="mx-auto flex h-56 w-44 shrink-0 items-center justify-center rounded-2xl bg-brand-light/40 text-sm text-brand-dark shadow-sm sm:mx-0">
+            Photo coming soon
+          </div>
+          <div className="space-y-4 text-gray-600">
+            <p>
+              Kimberly King, known as the Tough Topics Mom, is a leading
+              voice in child sexual abuse prevention, helping families,
+              schools, and organizations take action before abuse
+              happens. She is the author of the best-selling, most
+              highly recommended prevention book for children,{" "}
+              <em>
+                I Said No! A Kid-to-Kid Guide to Keeping Private Parts
+                Private
+              </em>
+              , co-written with her son Zack.
+            </p>
+            <p>
+              Kimberly is a mom, a survivor, a Sexual Abuse Prevention
+              Facilitator with Darkness to Light (D2L.org), and a Sexual
+              Assault Crisis Counselor with The Rowan Center. As a
+              best-selling author, educator, and trusted prevention
+              consultant, she partners with parents, schools, mental
+              health professionals, and youth-serving organizations to
+              build safer communities — one conversation at a time.
+            </p>
+          </div>
+        </Reveal>
+
+        <div className="mt-16 grid gap-6 sm:grid-cols-2">
+          <Reveal>
+            <ChecklistCard title="If you're searching for:" items={searchingFor} />
+          </Reveal>
+          <Reveal delay={0.1}>
+            <ChecklistCard title="Kimberly offers:" items={kimberlyOffers} />
+          </Reveal>
+        </div>
+
+        <Reveal className="mt-16 border-t border-gray-200 pt-12">
+          <LogoStrip heading="As Seen On" mentions={sitePressMentions} />
+        </Reveal>
+
+        <Reveal className="mt-16">
+          <h2 className="text-center text-3xl font-bold text-brand-dark sm:text-4xl">
+            What People Are Saying
+          </h2>
+          <div className="mt-8">
+            <TestimonialSection />
+          </div>
+        </Reveal>
+      </div>
+
+      <div className="px-4 pb-16 sm:px-6">
+        <Reveal className="mx-auto max-w-4xl">
+          <CtaBand
+            heading="Work with Kimberly"
+            buttonLabel="Get in Touch"
+            href="/contact"
+          />
+        </Reveal>
+      </div>
+    </div>
+  );
 }

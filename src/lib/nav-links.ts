@@ -5,10 +5,10 @@ export type NavLink = {
 
 export const navLinks: NavLink[] = [
   { label: "Home", href: "/" },
-  { label: "My New Book", href: "/book" },
-  { label: "Online Classes", href: "/online-classes" },
   { label: "About", href: "/about" },
-  { label: "Shop", href: "/shop" },
-  { label: "More Info", href: "/more-info" },
+  { label: "Speaking", href: "/speaking" },
+  { label: "Books", href: "/books" },
+  { label: "Online Classes", href: "/online-classes" },
+  { label: "Blog", href: "/blog" },
   { label: "Contact", href: "/contact" },
 ];
