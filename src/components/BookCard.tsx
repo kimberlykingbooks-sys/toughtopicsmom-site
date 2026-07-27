@@ -1,9 +1,14 @@
 import Image from "next/image";
-import type { Book } from "@/lib/books";
+import type { SanityBook } from "@/sanity/lib/queries";
+import { urlFor } from "@/sanity/lib/image";
 
-export default function BookCard({ book }: { book: Book }) {
-  const primaryLink = book.buyLinks.find((link) => link.primary) ?? book.buyLinks[0];
-  const secondaryLinks = book.buyLinks.filter((link) => link !== primaryLink);
+export default function BookCard({ book }: { book: SanityBook }) {
+  const buyLinks = book.buyLinks ?? [];
+  const primaryLink = buyLinks.find((link) => link.primary) ?? buyLinks[0];
+  const secondaryLinks = buyLinks.filter((link) => link !== primaryLink);
+  const coverImageUrl = book.coverImage
+    ? urlFor(book.coverImage).width(416).height(576).url()
+    : null;
 
   return (
     <article
@@ -12,15 +17,14 @@ export default function BookCard({ book }: { book: Book }) {
       }`}
     >
       <div className="relative mx-auto shrink-0 sm:mx-0">
-        {/* TODO: real cover image from Kimberly */}
         <div
           className={`flex items-center justify-center rounded-lg bg-brand-light/40 text-sm text-brand-dark ${
             book.featured ? "h-72 w-52" : "h-56 w-40"
           }`}
         >
-          {book.coverImage ? (
+          {coverImageUrl ? (
             <Image
-              src={book.coverImage}
+              src={coverImageUrl}
               alt={book.title}
               width={208}
               height={288}

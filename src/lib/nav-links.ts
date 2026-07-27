@@ -10,7 +10,6 @@ export const navLinks: NavLink[] = [
   { label: "Speaking", href: "/speaking" },
   { label: "Books", href: "/books" },
   { label: "Online Classes", href: "/online-classes" },
-  // TODO: replace with Kimberly's real Substack URL
-  { label: "Substack", href: "https://substack.com", external: true },
+  { label: "The Blind Spot", href: "https://kimberlykingauthor.substack.com", external: true },
   { label: "Contact", href: "/contact" },
 ];

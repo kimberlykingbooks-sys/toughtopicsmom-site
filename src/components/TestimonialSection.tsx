@@ -1,6 +1,12 @@
-import { testimonials } from "@/lib/testimonials";
+import type { SanityTestimonial } from "@/sanity/lib/queries";
 
-export default function TestimonialSection({ limit }: { limit?: number }) {
+export default function TestimonialSection({
+  testimonials,
+  limit,
+}: {
+  testimonials: SanityTestimonial[];
+  limit?: number;
+}) {
   if (testimonials.length === 0) {
     return (
       <p className="text-center text-sm text-gray-400">

@@ -1,31 +1,28 @@
 import ContactForm from "@/components/ContactForm";
 import LogoStrip from "@/components/LogoStrip";
 import Reveal from "@/components/Reveal";
-import { bookingOptions } from "@/lib/speaking-booking-options";
 import { speakingPressMentions, spokenAtMentions } from "@/lib/press";
-import { speakingTopics } from "@/lib/speaking-topics";
+import { getSpeakingPage } from "@/sanity/lib/queries";
 
-export default function SpeakingPage() {
+export const revalidate = 60;
+
+export default async function SpeakingPage() {
+  const content = await getSpeakingPage();
+  const topics = content?.topics ?? [];
+  const bookingOptions = content?.bookingOptions ?? [];
+
   return (
     <div>
       <section className="bg-gradient-to-b from-brand-light/40 to-white px-4 py-16 sm:px-6">
         <div className="mx-auto flex max-w-5xl flex-col gap-10 lg:flex-row lg:items-center">
           <Reveal className="flex-1">
             <h1 className="text-4xl font-bold text-brand-dark sm:text-5xl">
-              Empowered Adults. Protected Kids.
+              {content?.heroHeadline}
             </h1>
             <p className="mt-4 text-lg font-medium text-gray-700">
-              Body safety and sexual abuse prevention are possible when
-              safe adults are empowered to reduce risk, implement real
-              strategies, and protect the children in their care.
+              {content?.heroSubhead}
             </p>
-            <p className="mt-4 text-gray-600">
-              Kimberly King helps parents, caregivers, early childhood
-              educators, and program directors move from fear to
-              preparedness — building the policies, training, and
-              everyday practices that keep kids safer, at home and in
-              the programs that serve them.
-            </p>
+            <p className="mt-4 text-gray-600">{content?.heroBody}</p>
           </Reveal>
 
           {/* TODO: speaking photos from Kimberly (on stage / at a podium) */}
@@ -43,11 +40,11 @@ export default function SpeakingPage() {
       <section className="mx-auto max-w-5xl px-4 py-16 sm:px-6">
         <Reveal>
           <h2 className="text-center text-3xl font-bold text-brand-dark sm:text-4xl">
-            Speaking Topics That Drive Impact
+            {content?.topicsHeading}
           </h2>
         </Reveal>
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {speakingTopics.map((topic, index) => (
+          {topics.map((topic, index) => (
             <Reveal key={topic.title} delay={(index % 3) * 0.1}>
               <div className="h-full rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-lg">
                 <h3 className="font-bold text-brand-dark">{topic.title}</h3>
@@ -59,9 +56,7 @@ export default function SpeakingPage() {
           ))}
         </div>
         <p className="mt-8 text-center text-gray-600">
-          Each session is customized to your audience — parents,
-          educators, clinicians, or mixed groups — so attendees leave
-          with clear, actionable steps.
+          {content?.topicsClosingLine}
         </p>
       </section>
 
@@ -69,10 +64,9 @@ export default function SpeakingPage() {
         <div className="mx-auto max-w-5xl">
           <Reveal>
             <h2 className="text-center text-3xl font-bold text-brand-dark sm:text-4xl">
-              Book Kimberly For Your Event
+              {content?.bookingHeading}
             </h2>
           </Reveal>
-          {/* NOTE: prices are placeholders — real rates to come from Kimberly */}
           <div className="mt-10 grid gap-6 sm:grid-cols-3">
             {bookingOptions.map((option, index) => (
               <Reveal key={option.title} delay={index * 0.1}>
@@ -101,7 +95,7 @@ export default function SpeakingPage() {
       <section className="mx-auto max-w-5xl px-4 py-16 sm:px-6">
         <Reveal>
           <h2 className="text-center text-3xl font-bold text-brand-dark sm:text-4xl">
-            Watch Kimberly In Action
+            {content?.videoHeading}
           </h2>
           {/* TODO: embed speaking reel once Kimberly provides a video link */}
           <div className="mt-10 flex aspect-video items-center justify-center rounded-2xl bg-gray-100 text-gray-400 shadow-sm">
@@ -120,11 +114,10 @@ export default function SpeakingPage() {
       <section id="contact" className="bg-gradient-to-b from-brand-light/40 to-white px-4 py-16 sm:px-6">
         <Reveal className="mx-auto max-w-2xl">
           <h2 className="text-center text-3xl font-bold text-brand-dark sm:text-4xl">
-            Let&rsquo;s Bring This Conversation to Your Organization
+            {content?.contactHeading}
           </h2>
           <p className="mt-4 text-center text-gray-600">
-            Fill out the form below and Kimberly will follow up to
-            discuss your event, audience, and how she can help.
+            {content?.contactBody}
           </p>
           <div className="mt-10 rounded-2xl bg-white p-6 shadow-md sm:p-8">
             <ContactForm showEventType />
@@ -134,7 +127,7 @@ export default function SpeakingPage() {
 
       <div className="bg-gradient-to-br from-brand to-brand-dark px-4 py-10 text-center sm:px-6">
         <p className="text-lg font-semibold italic text-white">
-          Empowered Adults. Protected Kids.
+          {content?.closingTagline}
         </p>
       </div>
     </div>

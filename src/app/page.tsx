@@ -1,33 +1,30 @@
 import Reveal from "@/components/Reveal";
 import VideoPlayer from "@/components/VideoPlayer";
+import { getHomePage } from "@/sanity/lib/queries";
 
-export default function HomePage() {
+export const revalidate = 60;
+
+export default async function HomePage() {
+  const content = await getHomePage();
+
   return (
     <div>
       <section className="bg-gradient-to-b from-brand-light/40 to-white px-4 py-24 text-center sm:px-6">
         <Reveal className="mx-auto max-w-3xl">
           <h1 className="text-4xl font-bold text-brand-dark sm:text-5xl">
-            Empowered Adults. Protected Kids.
+            {content?.heroHeadline}
           </h1>
           <p className="mt-4 text-lg font-medium text-gray-700">
-            Body safety and sexual abuse prevention are possible when safe
-            adults are empowered to reduce risk, implement real
-            strategies, and protect the children in their care.
+            {content?.heroSubhead}
           </p>
-          <p className="mt-4 text-gray-600">
-            Kimberly King helps parents, caregivers, early childhood
-            educators, and program directors move from fear to
-            preparedness — building the policies, training, and everyday
-            practices that keep kids safer, at home and in the programs
-            that serve them.
-          </p>
+          <p className="mt-4 text-gray-600">{content?.heroBody}</p>
         </Reveal>
       </section>
 
       <section className="mx-auto max-w-3xl px-4 py-16 sm:px-6">
         <Reveal>
           <h2 className="text-center text-3xl font-bold text-brand-dark sm:text-4xl">
-            See I Said No! In Action
+            {content?.videoSectionHeading}
           </h2>
           <VideoPlayer
             src="/videos/i-said-no-trailer.mp4"

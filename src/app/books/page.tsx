@@ -1,11 +1,17 @@
 import BookCard from "@/components/BookCard";
 import LogoStrip from "@/components/LogoStrip";
 import TestimonialSection from "@/components/TestimonialSection";
-import { books } from "@/lib/books";
 import { sitePressMentions } from "@/lib/press";
 import Reveal from "@/components/Reveal";
+import { getBooks, getTestimonials } from "@/sanity/lib/queries";
 
-export default function BooksPage() {
+export const revalidate = 60;
+
+export default async function BooksPage() {
+  const [books, testimonials] = await Promise.all([
+    getBooks(),
+    getTestimonials(),
+  ]);
   const [featuredBook, ...otherBooks] = books;
 
   return (
@@ -16,12 +22,14 @@ export default function BooksPage() {
         </h1>
       </Reveal>
 
-      <Reveal className="mt-12">
-        <BookCard book={featuredBook} />
-      </Reveal>
+      {featuredBook && (
+        <Reveal className="mt-12">
+          <BookCard book={featuredBook} />
+        </Reveal>
+      )}
 
       <Reveal className="mt-16">
-        <TestimonialSection limit={3} />
+        <TestimonialSection testimonials={testimonials} limit={3} />
       </Reveal>
 
       <div className="mt-16 flex flex-col gap-8">
