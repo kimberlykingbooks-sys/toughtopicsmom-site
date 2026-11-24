@@ -28,14 +28,9 @@ Then open [http://localhost:3000](http://localhost:3000). Changes to files under
 1. Create a new folder under `src/app/` (e.g. `src/app/faq/`) with a `page.tsx` file inside it.
 2. Add the page to `src/lib/nav-links.ts` if it should appear in the site navigation.
 
-## Booking calendar (Calendly)
+## Booking a consultation (Stan)
 
-The header's **Book a Consultation** button opens a Calendly scheduler in a popup.
-Set the event link as an environment variable (locally in `.env.local`, and in your hosting provider's env settings):
+The header's **Book a Consultation** button opens her Stan 1:1 booking page in a new tab.
+Paste that page's link into `STAN_BOOKING_URL` in `src/lib/booking.ts`. Until it's set, the button goes to `/contact`.
 
-```
-NEXT_PUBLIC_CALENDLY_URL=https://calendly.com/your-name/consultation
-```
-
-Limited availability (which days/hours, max bookings per day, buffers, minimum notice) is configured in Calendly on that event type.
-Until the variable is set, the button links to `/contact` instead.
+Set up in Stan (not in this code): a 60-minute call, available Thursdays 3–5pm Eastern, with Zoom connected so each booking gets its own meeting link.

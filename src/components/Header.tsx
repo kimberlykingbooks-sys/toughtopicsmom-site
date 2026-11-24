@@ -6,22 +6,11 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { navLinks } from "@/lib/nav-links";
 import NavLink from "@/components/NavLink";
-import BookingModal, {
-  CALENDLY_URL,
-  FALLBACK_BOOKING_URL,
-} from "@/components/BookingModal";
+import { bookingLink } from "@/lib/booking";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isBookingOpen, setIsBookingOpen] = useState(false);
-
-  function handleBookClick(event: React.MouseEvent) {
-    setIsMenuOpen(false);
-    if (!CALENDLY_URL) return; // no calendar yet: follow the fallback link
-    event.preventDefault();
-    setIsBookingOpen(true);
-  }
 
   useEffect(() => {
     function handleScroll() {
@@ -71,8 +60,7 @@ export default function Header() {
           </nav>
 
           <a
-            href={FALLBACK_BOOKING_URL}
-            onClick={handleBookClick}
+            {...bookingLink}
             className="rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-white transition-all duration-200 hover:scale-105 hover:bg-accent-dark hover:shadow-md"
           >
             Book a Consultation
@@ -124,9 +112,9 @@ export default function Header() {
               ))}
               <li className="pt-2">
                 <a
-                  href={FALLBACK_BOOKING_URL}
+                  {...bookingLink}
                   className="inline-block rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-white"
-                  onClick={handleBookClick}
+                  onClick={() => setIsMenuOpen(false)}
                 >
                   Book a Consultation
                 </a>
@@ -135,11 +123,6 @@ export default function Header() {
           </motion.nav>
         )}
       </AnimatePresence>
-
-      <BookingModal
-        isOpen={isBookingOpen}
-        onClose={() => setIsBookingOpen(false)}
-      />
     </header>
   );
 }
