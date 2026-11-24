@@ -6,7 +6,8 @@
 // any payment are all set up on that Stan product, not here.
 //
 // While this is empty, the button goes to the Contact page instead.
-export const STAN_BOOKING_URL = "";
+export const STAN_BOOKING_URL =
+  "https://stan.store/Toughtopicsmom/p/book-a-11-call-with-me-awpo1nej";
 
 export const bookingLink = STAN_BOOKING_URL
   ? { href: STAN_BOOKING_URL, target: "_blank", rel: "noopener noreferrer" }
