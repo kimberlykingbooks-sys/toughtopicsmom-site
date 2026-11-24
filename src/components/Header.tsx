@@ -6,13 +6,22 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { navLinks } from "@/lib/nav-links";
 import NavLink from "@/components/NavLink";
-
-// TODO: point at our own booking flow once one exists on this site
-const DISCOVERY_CALL_URL = "https://www.toughtopicsmom.com/free-discovery-call";
+import BookingModal, {
+  CALENDLY_URL,
+  FALLBACK_BOOKING_URL,
+} from "@/components/BookingModal";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isBookingOpen, setIsBookingOpen] = useState(false);
+
+  function handleBookClick(event: React.MouseEvent) {
+    setIsMenuOpen(false);
+    if (!CALENDLY_URL) return; // no calendar yet: follow the fallback link
+    event.preventDefault();
+    setIsBookingOpen(true);
+  }
 
   useEffect(() => {
     function handleScroll() {
@@ -62,12 +71,11 @@ export default function Header() {
           </nav>
 
           <a
-            href={DISCOVERY_CALL_URL}
-            target="_blank"
-            rel="noopener noreferrer"
+            href={FALLBACK_BOOKING_URL}
+            onClick={handleBookClick}
             className="rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-white transition-all duration-200 hover:scale-105 hover:bg-accent-dark hover:shadow-md"
           >
-            Free Discovery Call
+            Book a Consultation
           </a>
         </div>
 
@@ -116,19 +124,22 @@ export default function Header() {
               ))}
               <li className="pt-2">
                 <a
-                  href={DISCOVERY_CALL_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href={FALLBACK_BOOKING_URL}
                   className="inline-block rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-white"
-                  onClick={() => setIsMenuOpen(false)}
+                  onClick={handleBookClick}
                 >
-                  Free Discovery Call
+                  Book a Consultation
                 </a>
               </li>
             </ul>
           </motion.nav>
         )}
       </AnimatePresence>
+
+      <BookingModal
+        isOpen={isBookingOpen}
+        onClose={() => setIsBookingOpen(false)}
+      />
     </header>
   );
 }

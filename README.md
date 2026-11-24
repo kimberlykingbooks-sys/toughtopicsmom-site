@@ -27,3 +27,15 @@ Then open [http://localhost:3000](http://localhost:3000). Changes to files under
 
 1. Create a new folder under `src/app/` (e.g. `src/app/faq/`) with a `page.tsx` file inside it.
 2. Add the page to `src/lib/nav-links.ts` if it should appear in the site navigation.
+
+## Booking calendar (Calendly)
+
+The header's **Book a Consultation** button opens a Calendly scheduler in a popup.
+Set the event link as an environment variable (locally in `.env.local`, and in your hosting provider's env settings):
+
+```
+NEXT_PUBLIC_CALENDLY_URL=https://calendly.com/your-name/consultation
+```
+
+Limited availability (which days/hours, max bookings per day, buffers, minimum notice) is configured in Calendly on that event type.
+Until the variable is set, the button links to `/contact` instead.
